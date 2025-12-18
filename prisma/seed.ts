@@ -1,7 +1,5 @@
-import { cons } from './../node_modules/effect/src/List';
 import { PrismaClient } from "@prisma/client";
 import * as bcrypt from "bcryptjs";
-import { title } from 'process';
 
 const prisma = new PrismaClient();
 
@@ -11,16 +9,16 @@ async function main() {
 
     const hashedPassword = await bcrypt.hash("password123", 10);
     const dummyImages = [
-        "https://picsum.photos/200/300",
-        "https://picsum.photos/200/300",
-        "https://picsum.photos/200/300"
+        "https://picsum.photos/1280/720?random=1",
+        "https://picsum.photos/1280/720?random=2",
+        "https://picsum.photos/1280/720?random=3"
     ]
     const user = await prisma.user.create({
         data: {
             name: "John Doe",
             email: "john@example.com",
             password: hashedPassword,
-            posts: {create: [
+            post: {create: [
                 {
                     title: "Hello World",
                     content: "This is my first post",
